@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { PostHeader } from "@/components/post/PostHeader";
 import { PostContent } from "@/components/post/PostContent";
 import { PostSidebar } from "@/components/post/PostSidebar";
 import { PostTrails } from "@/components/post/PostTrails";
+import { MobileSidebar } from "@/components/post/MobileSidebar";
 import { generatePalette } from "@/utils/generatePalette";
+import { PostNavigation } from "@/components/post/PostNavigation";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -63,8 +66,31 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Conteúdo Central */}
       <main className="min-w-0 max-w-full xl:max-w-250 px-2 py-8 lg:p-10">
+        <nav className="mb-8 lg:mb-10 flex items-center text-sm font-medium text-theme-muted overflow-x-auto whitespace-nowrap pb-2">
+          <Link href="/" className="hover:text-theme-text transition-colors flex items-center gap-1.5">
+            <span>-</span> Início
+          </Link>
+          <span className="mx-2 opacity-40">/</span>
+          <Link 
+            href={`/trail/${trailSlug}`} 
+            className="hover:text-(--line-color-600) dark:hover:text-(--line-color-400) transition-colors flex items-center gap-1.5"
+          >
+            <span>-</span> {currentPost.line.trail.title}
+          </Link>
+          <span className="mx-2 opacity-40">/</span>
+          <span className="text-(--line-color-500) font-bold opacity-80">
+            {currentPost.line.title}
+          </span>
+        </nav>
+
         <PostHeader post={currentPost} />
         <PostContent content={currentPost.content} />
+        <PostNavigation 
+          posts={linePosts || []} 
+          currentPostSlug={currentPost.slug}
+          trailSlug={trailSlug}
+          lineSlug={lineSlug}
+        />
       </main>
 
       {/* Sidebar Direita (Trilhas) */}
@@ -75,6 +101,12 @@ export default async function PostPage({ params }: PostPageProps) {
           currentLineSlug={currentPost.line.slug}
         />
       </aside>
+
+      <MobileSidebar 
+        line={currentPost.line} 
+        posts={linePosts || []} 
+        currentPostSlug={currentPost.slug} 
+      />
     </div>
   );
 }
