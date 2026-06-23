@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Post, TrailSummary } from "@/types";
-import { Rows4 } from "lucide-react";
+import { ArrowBigRight, Calendar, Rows4 } from "lucide-react";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -69,10 +69,10 @@ export default async function HomePage() {
                   </p>
                   <div className="mt-auto flex items-center justify-between text-xs font-medium text-theme-muted pt-4 border-t border-theme-border">
                     <span className="flex items-center gap-1.5">
-                      📅 {formattedDate}
+                      <Calendar className="size-5" /> {formattedDate}
                     </span>
                     <span className="flex items-center gap-1 group-hover:translate-x-1 group-hover:text-(--card-color) transition-all">
-                      Ler agora <span className="text-lg leading-none">→</span>
+                      Ler agora <ArrowBigRight className="size-5"/>
                     </span>
                   </div>
                 </div>
@@ -97,13 +97,14 @@ export default async function HomePage() {
             return (
               <div
                 key={trail.slug}
-                className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-theme-border flex flex-col sm:flex-row gap-4 items-start sm:items-center transition-all hover:border-slate-300 dark:hover:border-slate-600"
+                className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-red flex flex-col gap-2 items-start transition-all hover:border-slate-300 dark:hover:border-slate-600"
               >
+
+                <h3 className="text-2xl font-bold text-theme-text my-0 py-0">
+                  {trail.title}
+                </h3>
                 <div className="flex content-between w-full">
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-theme-text mb-2">
-                      {trail.title}
-                    </h3>
                     <div className="flex gap-4 text-sm text-theme-muted">
                       <span className="flex items-center gap-1">
                         {trail.linesCount} {trail.linesCount === 1 ? "linha" : "linhas"}
@@ -116,7 +117,7 @@ export default async function HomePage() {
                   {startLink !== "#" && (
                     <Link
                       href={startLink}
-                      className="inline-flex border border-theme-border items-center px-5 py-0 bg-transparent text-theme-text rounded-md font-semibold hover:bg-black/10 dark:hover:bg-white/10 transition-opacity"
+                      className="inline-flex border border-theme-border items-center px-5 py-2 bg-transparent text-theme-text rounded-md font-semibold hover:bg-black/10 dark:hover:bg-white/10 transition-opacity"
                     >
                       Começar Trilha
                     </Link>

@@ -80,7 +80,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </aside>
 
       {/* Conteúdo Central */}
-      <main className="min-w-0 max-w-full xl:max-w-250 py-8 lg:p-10">
+      <main className="min-w-0 max-w-full xl:max-w-250 py-8 px-2 lg:p-10">
         <nav className="mb-8 lg:mb-10 flex items-center text-sm font-medium text-theme-muted overflow-x-auto whitespace-nowrap pb-2">
           <Link href="/" className="hover:text-(--line-color-700) transition-colors flex items-center gap-1.5">
             <Home className="size-4" />

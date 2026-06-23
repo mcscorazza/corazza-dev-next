@@ -23,7 +23,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
   const trailData = await res.json();
 
   return (
-    <div className="max-w-5xl mx-auto py-20 px-6">
+    <div className="max-w-5xl mx-auto py-20 px-3 xl:px-6">
       <header className="mb-12">
         <h1 className="text-5xl font-black text-theme-text mt-4 uppercase tracking-tight">
           {trailData.title}
@@ -33,7 +33,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
         </p>
       </header>
 
-      <div className="grid gap-8">
+      <div className="grid gap-2 xl:gap-8">
         {trailData.lines?.map((line: any) => {
           const lineColor = line.color || "#64748b";
           const palette = generatePalette(lineColor);
@@ -41,7 +41,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
           return (
             <section
               key={line.id}
-              className="bg-theme-bg border border-theme-border rounded-2xl p-8 shadow-sm transition-colors"
+              className="bg-theme-bg border border-theme-border rounded-2xl p-3 xl:p-8 shadow-sm transition-colors"
               style={{
                 "--line-color": lineColor,
                 "--line-color-50": palette[50],
