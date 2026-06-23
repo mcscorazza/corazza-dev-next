@@ -37,6 +37,14 @@ export default function RootLayout({
     `}
         </Script>
       </head>
+
+      <Script
+        id="google-adsense"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+        strategy="afterInteractive"
+        crossOrigin="anonymous"
+      />
+
       {/* Injetando a variável da fonte direto na tag body */}
       <body className={`${roboto.className} min-h-screen antialiased`}>
 

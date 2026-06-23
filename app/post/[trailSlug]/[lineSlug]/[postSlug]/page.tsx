@@ -8,6 +8,7 @@ import { MobileSidebar } from "@/components/post/MobileSidebar";
 import { generatePalette } from "@/utils/generatePalette";
 import { PostNavigation } from "@/components/post/PostNavigation";
 import { ChevronRight, Home } from "lucide-react";
+import { Metadata } from "next";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -38,6 +39,19 @@ export default async function PostPage({ params }: PostPageProps) {
   const lineColor = currentPost.line.color || "#64748b";
   const palette = generatePalette(lineColor);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": currentPost.title,
+    "description": currentPost.summary,
+    "image": currentPost.coverImage,
+    "author": {
+      "@type": "Person",
+      "name": currentPost.author || "Marcos Corazza"
+    },
+    "datePublished": currentPost.date,
+  };
+
   return (
     <div
       className="w-full mx-auto grid grid-cols-1 xl:grid-cols-[minmax(280px,1fr)_minmax(0,1000px)_minmax(280px,1fr)] relative "
@@ -58,10 +72,10 @@ export default async function PostPage({ params }: PostPageProps) {
     >
       {/* Sidebar Esquerda (Posts da Linha) */}
       <aside className="hidden xl:block xl:ml-12 min-w-0 border-r border-theme-bg2 mt-6">
-        <PostSidebar 
-          line={currentPost.line} 
-          posts={linePosts || []} 
-          currentPostSlug={currentPost.slug} 
+        <PostSidebar
+          line={currentPost.line}
+          posts={linePosts || []}
+          currentPostSlug={currentPost.slug}
         />
       </aside>
 
@@ -73,11 +87,11 @@ export default async function PostPage({ params }: PostPageProps) {
             HOME
           </Link>
           <ChevronRight className="size-4 opacity-40 mx-2" />
-          <Link 
-            href={`/trail/${trailSlug}`} 
+          <Link
+            href={`/trail/${trailSlug}`}
             className="hover:text-(--line-color-700) transition-colors flex items-center gap-1.5"
           >
-          {currentPost.line.trail.title}
+            {currentPost.line.trail.title}
           </Link>
           <ChevronRight className="size-4 opacity-40 mx-2" />
           <span className="text-(--line-color-700) font-bold">
@@ -87,11 +101,15 @@ export default async function PostPage({ params }: PostPageProps) {
 
         <PostHeader post={currentPost} />
         <PostContent content={currentPost.content} />
-        <PostNavigation 
-          posts={linePosts || []} 
+        <PostNavigation
+          posts={linePosts || []}
           currentPostSlug={currentPost.slug}
           trailSlug={trailSlug}
           lineSlug={lineSlug}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </main>
 
@@ -104,11 +122,52 @@ export default async function PostPage({ params }: PostPageProps) {
         />
       </aside>
 
-      <MobileSidebar 
-        line={currentPost.line} 
-        posts={linePosts || []} 
-        currentPostSlug={currentPost.slug} 
+      <MobileSidebar
+        line={currentPost.line}
+        posts={linePosts || []}
+        currentPostSlug={currentPost.slug}
       />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  // Faça uma chamada para uma rota da sua API que retorne a lista de TODOS os posts salvos
+  const res = await fetch(`${apiUrl}/posts/all-slugs`);
+  if (!res.ok) return [];
+
+  const posts = await res.json(); // Espera-se um array de objetos: { trailSlug, lineSlug, postSlug }
+
+  return posts.map((post: any) => ({
+    trailSlug: post.trailSlug,
+    lineSlug: post.lineSlug,
+    postSlug: post.postSlug,
+  }));
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const { trailSlug, lineSlug, postSlug } = await params;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const res = await fetch(`${apiUrl}/posts/${trailSlug}/${lineSlug}/${postSlug}`);
+  if (!res.ok) return {};
+  const post = await res.json();
+
+  return {
+    title: `${post.title} | CORAZZA.DEV`,
+    description: post.summary || `Aprenda mais sobre ${post.title} na linha ${post.line.title}.`,
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      images: post.coverImage ? [{ url: post.coverImage }] : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+    },
+  };
 }
