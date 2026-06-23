@@ -35,7 +35,6 @@ export default async function TrailPage({ params }: TrailPageProps) {
 
       <div className="grid gap-8">
         {trailData.lines?.map((line: any) => {
-          // 1. Pega a cor da linha atual e gera a paleta específica para ela
           const lineColor = line.color || "#64748b";
           const palette = generatePalette(lineColor);
 
@@ -43,7 +42,6 @@ export default async function TrailPage({ params }: TrailPageProps) {
             <section
               key={line.id}
               className="bg-theme-bg border border-theme-border rounded-2xl p-8 shadow-sm transition-colors"
-              // 2. Injeta as variáveis dessa linha específica no escopo deste bloco HTML
               style={{
                 "--line-color": lineColor,
                 "--line-color-50": palette[50],
@@ -60,7 +58,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
               } as React.CSSProperties}
             >
               {/* 3. Usa as variáveis para pintar o título da linha */}
-              <h2 className="text-2xl font-bold mb-6 text-(--line-color-600) dark:text-(--line-color-400)">
+              <h2 className="text-2xl font-bold mb-6 text-(--line-color-700)">
                 {line.title}
               </h2>
               
@@ -69,7 +67,6 @@ export default async function TrailPage({ params }: TrailPageProps) {
                   <Link
                     key={post.id}
                     href={`/post/${slug}/${line.slug}/${post.slug}`}
-                    // 4. Efeitos visuais nos cards usando as tonalidades da paleta gerada
                     className="group flex items-center justify-between p-4 bg-theme-bg rounded-lg border border-theme-border/60 hover:border-(--line-color-500) hover:bg-(--line-color-50)/10 dark:hover:bg-(--line-color-900)/10 transition-all"
                   >
                     <span className="font-medium text-theme-text group-hover:text-(--line-color-600) dark:group-hover:text-(--line-color-400) transition-colors">

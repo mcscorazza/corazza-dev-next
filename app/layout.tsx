@@ -40,12 +40,11 @@ export default function RootLayout({
       {/* Injetando a variável da fonte direto na tag body */}
       <body className={`${roboto.className} min-h-screen antialiased`}>
 
-        <header className="py-6 px-6 border-b border-theme-border bg-theme-bg/80 backdrop-blur-md sticky top-0 z-10">
-          <div className="max-w-250 mx-auto flex justify-between items-center">
-            <Link href="/" className="text-xl font-black text-theme-text tracking-tighter">
+        <header className="py-4 px-6 border-b-2 border-theme-bg2 bg-theme-bg/80 backdrop-blur-md sticky top-0 z-10">
+          <div className="max-w-full mx-auto flex justify-between items-center">
+            <Link href="/" className="text-3xl font-black text-theme-text tracking-tighter">
               CORAZZA<span className="text-blue-600">.DEV</span>
             </Link>
-
             <ThemeToggle />
           </div>
         </header>

@@ -7,6 +7,7 @@ import { PostTrails } from "@/components/post/PostTrails";
 import { MobileSidebar } from "@/components/post/MobileSidebar";
 import { generatePalette } from "@/utils/generatePalette";
 import { PostNavigation } from "@/components/post/PostNavigation";
+import { ChevronRight, Home } from "lucide-react";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -39,7 +40,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <div
-      className="w-full mx-auto grid grid-cols-1 xl:grid-cols-[minmax(280px,1fr)_minmax(0,1000px)_minmax(280px,1fr)] relative"
+      className="w-full mx-auto grid grid-cols-1 xl:grid-cols-[minmax(280px,1fr)_minmax(0,1000px)_minmax(280px,1fr)] relative "
       style={{
         "--line-color": lineColor,
         "--line-color-50": palette[50],
@@ -56,7 +57,7 @@ export default async function PostPage({ params }: PostPageProps) {
       } as React.CSSProperties}
     >
       {/* Sidebar Esquerda (Posts da Linha) */}
-      <aside className="hidden xl:block min-w-0">
+      <aside className="hidden xl:block xl:ml-12 min-w-0 border-r border-theme-bg2 mt-6">
         <PostSidebar 
           line={currentPost.line} 
           posts={linePosts || []} 
@@ -65,19 +66,20 @@ export default async function PostPage({ params }: PostPageProps) {
       </aside>
 
       {/* Conteúdo Central */}
-      <main className="min-w-0 max-w-full xl:max-w-250 px-2 py-8 lg:p-10">
+      <main className="min-w-0 max-w-full xl:max-w-250 py-8 lg:p-10">
         <nav className="mb-8 lg:mb-10 flex items-center text-sm font-medium text-theme-muted overflow-x-auto whitespace-nowrap pb-2">
-          <Link href="/" className="hover:text-theme-text transition-colors flex items-center gap-1.5">
-            <span>-</span> Início
+          <Link href="/" className="hover:text-theme-muted transition-colors flex items-center gap-1.5">
+            <Home className="size-4" />
+            HOME
           </Link>
-          <span className="mx-2 opacity-40">/</span>
+          <ChevronRight className="size-4 opacity-40 mx-2" />
           <Link 
             href={`/trail/${trailSlug}`} 
             className="hover:text-(--line-color-600) dark:hover:text-(--line-color-400) transition-colors flex items-center gap-1.5"
           >
-            <span>-</span> {currentPost.line.trail.title}
+          {currentPost.line.trail.title}
           </Link>
-          <span className="mx-2 opacity-40">/</span>
+          <ChevronRight className="size-4 opacity-40 mx-2" />
           <span className="text-(--line-color-500) font-bold opacity-80">
             {currentPost.line.title}
           </span>
@@ -94,7 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </main>
 
       {/* Sidebar Direita (Trilhas) */}
-      <aside className="hidden xl:block min-w-0">
+      <aside className="hidden xl:block xl:mr-12 min-w-0 border-l border-theme-bg2 mt-6">
         <PostTrails
           allTrails={allTrails || []}
           currentTrailSlug={currentPost.line.trail.slug}

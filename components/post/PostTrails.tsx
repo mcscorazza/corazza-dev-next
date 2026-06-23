@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { TrailSummary } from "@/types";
+import { ArrowRight } from "lucide-react";
 
 interface TrailsProps {
   allTrails: TrailSummary[];
@@ -24,7 +25,7 @@ export const PostTrails = ({
 
   return (
     <div className='sticky top-28 p-6'>
-      <h3 className="text-sm font-bold text-(--line-color-400) uppercase tracking-widest mb-6">
+      <h3 className="text-sm font-bold text-(--line-color-700) uppercase tracking-widest mb-6">
         Explorar Mapa
       </h3>
 
@@ -36,17 +37,17 @@ export const PostTrails = ({
           return (
             <div
               key={trail.slug}
-              className={`rounded-2xl border-2 transition-all overflow-hidden 
-                ${isCurrentTrail ? 'border-(--line-color-500) bg-(--line-color-900)/50 shadow-sm' : 'border-slate-800'}`}
+              className={`rounded-2xl border transition-all overflow-hidden 
+                ${isCurrentTrail ? 'border-(--line-color-700) bg-(--line-color-50) dark:bg-(--line-color-950)/20 shadow-sm' : 'border-theme-border'}`}
             >
               <button
                 onClick={() => onToggleTrail(trail.slug)}
                 className={`w-full text-left p-4 flex flex-col transition-colors cursor-pointer
-                  ${isExpanded ? 'bg-(--line-color-900)/30' : 'bg-(--line-color-900)/10 hover:bg-(--line-color-100) dark:hover:bg-(--line-color-800)'}`}
+                  ${isExpanded ? 'bg-(--line-color-50) dark:bg-(--line-color-950)/20' : 'bg-transparente hover:bg-(--line-color-50) dark:hover:bg-(--line-color-950)/20'}`}
               >
                 <div className="flex flex-row items-center justify-between w-full">
                   <h4 className={`font-bold text-sm mt-1! 
-                    ${isCurrentTrail ? 'text-(--line-color-500)' : 'text-theme-muted'}`}>
+                    ${isCurrentTrail ? 'text-(--line-color-800)' : 'text-theme-muted'}`}>
                     {trail.title}
                   </h4>
                   <span className="text-[14px] text-slate-500">
@@ -59,7 +60,7 @@ export const PostTrails = ({
               </button>
 
               {isExpanded && trail.lines && (
-                <div className="bg-slate-900/20 p-2 flex flex-col gap-1 border-t border-slate-800">
+                <div className="p-2 flex flex-col gap-1 border-t border-theme-border">
                   {trail.lines.map((line) => {
                     const isCurrentLine = isCurrentTrail && line.slug === currentLineSlug;
 
@@ -69,12 +70,14 @@ export const PostTrails = ({
                         href={`/post/${trail.slug}/${line.slug}/${line.firstPostSlug}`}
                         className={`text-xs p-3 rounded-lg flex items-center justify-between group transition-all 
                           ${isCurrentLine
-                            ? 'bg-[--line-color]/20 text-(--line-color) font-bold'
-                            : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                            ? 'text-(--line-color) font-bold'
+                            : 'text-theme-text hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-200'
                           }`}
                       >
                         <span>{line.title}</span>
-                        {!isCurrentLine && <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>}
+                        {!isCurrentLine && <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ArrowRight  className="size-4 opacity-100 mx-2 text-(--line-color-800)" />
+                          </span>}
                       </Link>
                     );
                   })}

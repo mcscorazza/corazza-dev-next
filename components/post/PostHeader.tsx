@@ -10,10 +10,12 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
 
   return (
     <header className="mb-12">
-      <h1 className='text-4xl! text-(--line-color-700)! dark:text-(--line-color-200)! drop-shadow-sm font-extrabold mb-4 p-2'>
-        Estação #{stationNumber}
+      {/* Número da Estação */}
+      <h1 className='text-4xl! drop-shadow-sm mb-4 p-2 font-bold'>Estação 
+        <span className='text-(--line-color-600)! dark:text-(--line-color-700)! font-extrabold'> #{stationNumber} </span>
       </h1>
 
+      {/* Capa do post com o título */}
       <div className='relative rounded-sm lg:rounded-xl overflow-hidden'>
         {post.coverImage && (
           <img src={post.coverImage} alt={`Capa de ${post.title}`} className="w-full object-cover min-h-20" />
@@ -23,21 +25,25 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
         </h2>
       </div>
 
-      <div className="flex justify-center items-center gap-2 m-2 flex-wrap flex-col">
-        <small className='text-center tracking-wider text-sm text-(--line-color-600) dark:text-(--line-color-200) my-2'>
+      {/* Autor e Data do Post */}
+      <div className="flex items-start mb-4 flex-wrap flex-col">
+        <small className='text-center tracking-wider text-theme-muted text-sm my-1.5'>
           {post.author} | {formatCustomDate(post.date)}
         </small>
         <div className='flex gap-2 flex-wrap justify-center'>
           {post.tags && post.tags.split(',').map((tag, idx) => (
-            <span key={idx} className="text-(--line-color-300) text-xs font-medium border border-(--line-color-500) rounded-full py-px px-3 cursor-pointer hover:bg-black/10 dark:hover:bg-white/10">
+            <span key={idx} 
+            className="text-(--line-color-700) text-xs border border-(--line-color-700)
+            rounded-lg py-1.5 px-3 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200">
               #{tag.trim()}
             </span>
           ))}
         </div>
       </div>
-
+      
+      {/* Resumo do Post */}
       {post.summary && (
-        <p className="text-sm text-theme-text italic leading-relaxed border-l-4 border-(--line-color-500) p-4">
+        <p className="text-sm text-theme-text italic leading-relaxed border-l-4 border-(--line-color-700) p-4">
           {post.summary}
         </p>
       )}

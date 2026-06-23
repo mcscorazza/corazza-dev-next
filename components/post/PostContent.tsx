@@ -32,29 +32,28 @@ export const PostContent = ({ content }: PostContentProps) => {
       prose prose-slate lg:prose-lg max-w-none
       prose-p:text-theme-text prose-p:leading-relaxed prose-p:text-justify prose-p:my-0!
       
-      prose-code:bg-slate-200 dark:prose-code:bg-gray-600 dark:prose-code:text-theme-muted! prose-code:py-px prose-code:px-1 prose-code:rounded-sm
+      prose-code:bg-slate-200 dark:prose-code:bg-gray-600 dark:prose-code:text-theme-text! prose-code:py-px prose-code:px-1 prose-code:rounded-sm
       prose-code:before:content-none prose-code:after:content-none
       [&_pre_code]:block
       [&_pre_code]:bg-transparent!
 
-      prose-strong:text-theme-muted prose-strong:font-bold 
+      prose-strong:text-theme-text prose-strong:font-bold 
       prose-img:block! prose-img:mx-auto! prose-img:shadow-none! prose-img:rounded-none!
       prose-figure:my-1 prose-figure:mt-6
 
       lg:prose-table:w-[60%] lg:prose-table:mx-auto
       
-      prose-th:my-0!
-      prose-th:p-2 prose-th:text-left prose-th:font-bold prose-th:text-theme-text
+      prose-th:my-0! prose-th:p-2 prose-th:text-left prose-th:font-bold prose-th:text-(--line-color-700)
       prose-th:border-b-2 prose-th:border-theme-border
 
       prose-tr:border-b prose-tr:border-theme-border transition-colors
       prose-td:p-2 prose-td:text-theme-muted prose-td:align-middle
 
       prose-headings:font-bold
-      prose-h2:text-(--line-color-600) prose-h2:mt-12 prose-h2:border-b prose-h2:border-theme-border prose-h2:pb-2
-      prose-h3:text-(--line-color-700) dark:prose-h3:text-(--line-color-500) prose-h3:mt-10 prose-h3:mb-2 
-      prose-h4:text-(--line-color-800) dark:prose-h4:text-(--line-color-400) prose-h4:mt-10 prose-h4:mb-2
-      prose-h5:text-(--line-color-900) dark:prose-h5:text-(--line-color-300) prose-h5:mt-10 prose-h5:mb-2
+      prose-h2:text-theme-sec dark:prose-h2:text-theme-sec! prose-h2:mt-12 prose-h2:border-b prose-h2:border-theme-border prose-h2:pb-2
+      prose-h3:text-theme-sec dark:prose-h3:text-theme-sec! prose-h3:mt-10 prose-h3:mb-2 
+      prose-h4:text-theme-sec dark:prose-h4:text-theme-sec! prose-h4:mt-10 prose-h4:mb-2
+      prose-h5:text-theme-sec dark:prose-h5:text-theme-sec! prose-h5:mt-10 prose-h5:mb-2
 
       prose-a:text-(--line-color) prose-a:font-semibold prose-a:no-underline hover:prose-a:underline hover:prose-a:opacity-80
 

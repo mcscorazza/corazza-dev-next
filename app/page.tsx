@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Post, TrailSummary } from "@/types";
+import { Rows4 } from "lucide-react";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -20,11 +21,6 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-16 xl:px-0 min-h-screen">
-      <header className="mb-16 text-center md:text-left">
-        <h1 className="text-4xl md:text-5xl font-black text-theme-text mb-4">
-          Bem-vindo ao Blog
-        </h1>
-      </header>
       <section className="mb-20">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-theme-text">Estações Recentes</h2>
@@ -52,7 +48,7 @@ export default async function HomePage() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-4xl">
-                      🛤️
+                      <Rows4 className="size-4" />
                     </div>
                   )}
 
@@ -101,25 +97,26 @@ export default async function HomePage() {
             return (
               <div
                 key={trail.slug}
-                className="p-8 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-theme-border flex flex-col sm:flex-row gap-8 items-start sm:items-center transition-all hover:border-slate-300 dark:hover:border-slate-600"
+                className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-theme-border flex flex-col sm:flex-row gap-4 items-start sm:items-center transition-all hover:border-slate-300 dark:hover:border-slate-600"
               >
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-theme-text mb-2">
-                    {trail.title}
-                  </h3>
-                  <div className="flex gap-4 text-sm text-theme-muted mb-6">
-                    <span className="flex items-center gap-1">
-                      {trail.linesCount} {trail.linesCount === 1 ? "linha" : "linhas"}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      {trail.postsCount} {trail.postsCount === 1 ? "estação" : "estações"}
-                    </span>
+                <div className="flex content-between w-full">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-theme-text mb-2">
+                      {trail.title}
+                    </h3>
+                    <div className="flex gap-4 text-sm text-theme-muted">
+                      <span className="flex items-center gap-1">
+                        {trail.linesCount} {trail.linesCount === 1 ? "linha" : "linhas"}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        {trail.postsCount} {trail.postsCount === 1 ? "estação" : "estações"}
+                      </span>
+                    </div>
                   </div>
-
                   {startLink !== "#" && (
                     <Link
                       href={startLink}
-                      className="inline-flex items-center px-5 py-2.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                      className="inline-flex border border-theme-border items-center px-5 py-0 bg-transparent text-theme-text rounded-md font-semibold hover:bg-black/10 dark:hover:bg-white/10 transition-opacity"
                     >
                       Começar Trilha
                     </Link>

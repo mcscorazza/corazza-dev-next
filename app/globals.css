@@ -9,18 +9,20 @@
     --bg-primary: #f8fafc;
     --bg-secondary: #F2F4F6;
     --bg-code: #e8eaec;
-    --text-primary: #1E2328;
+    --text-primary: #0F1117;
+    --text-secondary: #000000;
     --text-muted: #3b4650;
     --border-color: #d4d4d4;
   }
 
   .dark {
-    --bg-primary: #1E2328;
-    --bg-secondary: #23282D;
-    --bg-code: #333;
+    --bg-primary: #0F1117;
+    --bg-secondary: #181C24;
+    --bg-code: #333333;
     --text-primary: #cdd6df;
-    --text-muted: #d6d8db;
-    --border-color: #f8fafc;
+    --text-secondary: #ffffff;
+    --text-muted: #8599ad;
+    --border-color: #2c465f;
   }
 }
 
@@ -29,6 +31,7 @@
   --color-theme-bg2: var(--bg-secondary);
   --color-theme-code: var(--bg-code);
   --color-theme-text: var(--text-primary);
+  --color-theme-sec: var(--text-secondary);
   --color-theme-muted: var(--text-muted);
   --color-theme-border: var(--border-color);
 }

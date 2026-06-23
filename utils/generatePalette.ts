@@ -22,7 +22,7 @@ export function generatePalette(baseColor: string): TailwindPalette {
   const scale = chroma
     .scale(["#ffffff", baseColor, "#000000"])
     .mode("lch")
-    .domain([0, 0.5, 1]);
+    .domain([0, 0.7, 1]);
 
   return {
     50: scale(0.05).hex(),
