@@ -20,14 +20,14 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
         {post.coverImage && (
           <img src={post.coverImage} alt={`Capa de ${post.title}`} className="w-full object-cover min-h-20" />
         )}
-        <h2 className='absolute inset-0 bg-black/40 text-(--line-color-50)! flex items-end justify-start drop-shadow-sm m-0! p-6 text-xl! lg:text-4xl! font-bold'>
+        <h2 className='absolute inset-0 bg-black/10 text-(--line-color-50)! flex items-end justify-start drop-shadow-sm m-0! p-6 text-xl! lg:text-4xl! font-bold'>
           {post.title}
         </h2>
       </div>
 
       {/* Autor e Data do Post */}
       <div className="flex items-start mb-4 flex-wrap flex-col">
-        <small className='text-center tracking-wider text-theme-muted text-sm my-1.5'>
+        <small className='text-center tracking-wider text-theme-muted text-sm my-2'>
           {post.author} | {formatCustomDate(post.date)}
         </small>
         <div className='flex gap-2 flex-wrap justify-center'>

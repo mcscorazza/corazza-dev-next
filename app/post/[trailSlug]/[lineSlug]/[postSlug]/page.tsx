@@ -68,19 +68,19 @@ export default async function PostPage({ params }: PostPageProps) {
       {/* Conteúdo Central */}
       <main className="min-w-0 max-w-full xl:max-w-250 py-8 lg:p-10">
         <nav className="mb-8 lg:mb-10 flex items-center text-sm font-medium text-theme-muted overflow-x-auto whitespace-nowrap pb-2">
-          <Link href="/" className="hover:text-theme-muted transition-colors flex items-center gap-1.5">
+          <Link href="/" className="hover:text-(--line-color-700) transition-colors flex items-center gap-1.5">
             <Home className="size-4" />
             HOME
           </Link>
           <ChevronRight className="size-4 opacity-40 mx-2" />
           <Link 
             href={`/trail/${trailSlug}`} 
-            className="hover:text-(--line-color-600) dark:hover:text-(--line-color-400) transition-colors flex items-center gap-1.5"
+            className="hover:text-(--line-color-700) transition-colors flex items-center gap-1.5"
           >
           {currentPost.line.trail.title}
           </Link>
           <ChevronRight className="size-4 opacity-40 mx-2" />
-          <span className="text-(--line-color-500) font-bold opacity-80">
+          <span className="text-(--line-color-700) font-bold">
             {currentPost.line.title}
           </span>
         </nav>
