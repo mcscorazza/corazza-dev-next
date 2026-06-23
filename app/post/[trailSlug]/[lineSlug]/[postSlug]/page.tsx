@@ -23,7 +23,6 @@ interface PostPageProps {
 export default async function PostPage({ params }: PostPageProps) {
   const { trailSlug, lineSlug, postSlug } = await params;
 
-  // Busca paralela para otimizar velocidade
   const [postRes, trailsRes, linePostsRes] = await Promise.all([
     fetch(`${apiUrl}/posts/${trailSlug}/${lineSlug}/${postSlug}`, { next: { revalidate: 60 } }),
     fetch(`${apiUrl}/trails`, { next: { revalidate: 3600 } }),
@@ -71,7 +70,7 @@ export default async function PostPage({ params }: PostPageProps) {
       } as React.CSSProperties}
     >
       {/* Sidebar Esquerda (Posts da Linha) */}
-      <aside className="hidden xl:block xl:ml-12 min-w-0 border-r border-theme-bg2 mt-6">
+      <aside className="hidden xl:ml-0 xl:block 2xl:ml-24 min-w-0 border-r border-theme-border mt-6">
         <PostSidebar
           line={currentPost.line}
           posts={linePosts || []}
@@ -114,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </main>
 
       {/* Sidebar Direita (Trilhas) */}
-      <aside className="hidden xl:block xl:mr-12 min-w-0 border-l border-theme-bg2 mt-6">
+      <aside className="hidden xl:block xl:mr-0 2xl:mr-24 min-w-0 border-l border-theme-border mt-6">
         <PostTrails
           allTrails={allTrails || []}
           currentTrailSlug={currentPost.line.trail.slug}
@@ -133,13 +132,9 @@ export default async function PostPage({ params }: PostPageProps) {
 
 export async function generateStaticParams() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-  // Faça uma chamada para uma rota da sua API que retorne a lista de TODOS os posts salvos
   const res = await fetch(`${apiUrl}/posts/all-slugs`);
   if (!res.ok) return [];
-
-  const posts = await res.json(); // Espera-se um array de objetos: { trailSlug, lineSlug, postSlug }
-
+  const posts = await res.json();
   return posts.map((post: any) => ({
     trailSlug: post.trailSlug,
     lineSlug: post.lineSlug,

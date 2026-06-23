@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Post } from "@/types";
+import { ArrowBigLeft, ArrowBigLeftDash, ArrowBigRight } from "lucide-react";
 
 interface PostNavigationProps {
   posts: Post[];
@@ -33,14 +34,14 @@ export const PostNavigation = ({
           className="flex-1 p-5 rounded-2xl border border-theme-border bg-theme-bg/50 hover:bg-(--line-color-50)/50 dark:hover:bg-(--line-color-900)/20 hover:border-(--line-color-500) transition-all group flex flex-col text-left"
         >
           <span className="text-xs font-bold text-theme-muted uppercase tracking-widest mb-2 group-hover:text-(--line-color-600) dark:group-hover:text-(--line-color-400) transition-colors flex items-center gap-2">
-            <span>←</span> Estação Anterior
+            <ArrowBigLeft className="size-4" /> Estação Anterior
           </span>
           <span className="font-medium text-theme-text group-hover:text-blue-500 transition-colors">
             {prevPost.title}
           </span>
         </Link>
       ) : (
-        <div className="flex-1" /> // Div vazia para manter o alinhamento caso não tenha o anterior
+        <div className="flex-1" />
       )}
 
       {/* Botão Próximo */}
@@ -50,7 +51,7 @@ export const PostNavigation = ({
           className="flex-1 p-5 rounded-2xl border border-theme-border bg-theme-bg/50 hover:bg-(--line-color-50)/50 dark:hover:bg-(--line-color-900)/20 hover:border-(--line-color-500) transition-all group flex flex-col text-right items-end"
         >
           <span className="text-xs font-bold text-theme-muted uppercase tracking-widest mb-2 group-hover:text-(--line-color-600) dark:group-hover:text-(--line-color-400) transition-colors flex items-center gap-2">
-            Próxima Estação <span>→</span>
+            Próxima Estação <ArrowBigRight className="size-4" />
           </span>
           <span className="font-medium text-theme-text group-hover:text-blue-500 transition-colors text-right">
             {nextPost.title}
