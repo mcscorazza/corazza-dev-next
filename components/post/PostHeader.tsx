@@ -11,7 +11,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
   return (
     <header className="mb-12">
       {/* Número da Estação */}
-      <h1 className='text-4xl! drop-shadow-sm mb-4 p-2 font-bold'>Estação 
+      <h1 className='text-4xl! drop-shadow-sm mb-4 p-2 font-bold'>Estação
         <span className='text-(--line-color-600)! dark:text-(--line-color-700)! font-extrabold'> #{stationNumber} </span>
       </h1>
 
@@ -20,7 +20,7 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
         {post.coverImage && (
           <img src={post.coverImage} alt={`Capa de ${post.title}`} className="w-full object-cover min-h-20" />
         )}
-        <h2 className='absolute inset-0 bg-black/10 text-(--line-color-50)! flex items-end justify-start drop-shadow-sm m-0! p-6 text-xl! lg:text-4xl! font-bold'>
+        <h2 className='absolute inset-0 [text-shadow:2px_2px_4px_rgba(0,0,0,1)] bg-black/30 text-(--line-color-50)! flex items-end justify-start m-0! p-6 text-xl! lg:text-4xl! font-bold'>
           {post.title}
         </h2>
       </div>
@@ -32,15 +32,15 @@ export const PostHeader = ({ post }: PostHeaderProps) => {
         </small>
         <div className='flex gap-2 flex-wrap justify-center'>
           {post.tags && post.tags.split(',').map((tag, idx) => (
-            <span key={idx} 
-            className="text-(--line-color-700) text-xs border border-(--line-color-700)
+            <span key={idx}
+              className="text-(--line-color-700) text-xs border border-(--line-color-700)
             rounded-lg py-1.5 px-3 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200">
               #{tag.trim()}
             </span>
           ))}
         </div>
       </div>
-      
+
       {/* Resumo do Post */}
       {post.summary && (
         <p className="text-sm text-theme-text italic leading-relaxed border-l-4 border-(--line-color-700) p-4">

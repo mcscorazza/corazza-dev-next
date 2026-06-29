@@ -52,7 +52,8 @@ export const PostContent = ({ content }: PostContentProps) => {
       prose-td:p-2 prose-td:text-theme-muted prose-td:align-middle
 
       prose-headings:font-bold
-      prose-h2:text-theme-sec dark:prose-h2:text-theme-sec! prose-h2:mt-12 prose-h2:border-b prose-h2:border-theme-border prose-h2:pb-2
+      prose-h2:text-theme-sec prose-h2:mt-12 prose-h2:text-red-500!
+      prose-h2:border-theme-border prose-h2:pb-2
       prose-h3:text-theme-sec dark:prose-h3:text-theme-sec! prose-h3:mt-10 prose-h3:mb-2 
       prose-h4:text-theme-sec dark:prose-h4:text-theme-sec! prose-h4:mt-10 prose-h4:mb-2
       prose-h5:text-theme-sec dark:prose-h5:text-theme-sec! prose-h5:mt-10 prose-h5:mb-2
@@ -65,9 +66,7 @@ export const PostContent = ({ content }: PostContentProps) => {
       prose-pre:bg-theme-code prose-pre:border prose-pre:border-none prose-pre:shadow-sm
     ">
       <ReactMarkdown
-        // 3. Adicionado o rehypeKatex junto com o rehypeRaw
         rehypePlugins={[rehypeRaw, rehypeKatex]}
-        // 4. Adicionado o remarkMath junto com o remarkGfm
         remarkPlugins={[remarkGfm, remarkMath]}
         components={{
           p: ({ children }) => {
