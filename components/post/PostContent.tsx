@@ -39,12 +39,6 @@ export const PostContent = ({ content }: PostContentProps) => {
       [&_pre_code]:block
       [&_pre_code]:bg-transparent!
 
-      [&_.katex-display]:my-8 
-      [&_.katex-display]:text-center 
-      [&_.katex-display]:overflow-x-auto 
-      [&_.katex-display]:overflow-y-hidden 
-      [&_.katex-display]:py-2
-
       prose-strong:text-theme-text prose-strong:font-bold 
       prose-img:block! prose-img:mx-auto! prose-img:shadow-none! prose-img:rounded-none!
       prose-figure:my-1 prose-figure:mt-6

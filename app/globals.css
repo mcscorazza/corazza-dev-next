@@ -51,3 +51,35 @@ body {
 img {
   margin: 0;
 }
+
+.prose .katex-display {
+  margin-top: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+  text-align: center !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding-bottom: 1rem !important;
+  padding-top: 0.5rem !important;
+  display: block !important;
+}
+
+.prose .katex-display::-webkit-scrollbar {
+  height: 6px;
+}
+
+.prose .katex-display::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prose .katex-display::-webkit-scrollbar-thumb {
+  background-color: var(--color-slate-300);
+  border-radius: 10px;
+}
+
+.dark .prose .katex {
+  color: #e2e8f0 !important;
+}
+
+.dark .prose .katex .mfrac .frac-line {
+  border-bottom-color: #e2e8f0 !important;
+}
