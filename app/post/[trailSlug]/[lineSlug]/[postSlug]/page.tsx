@@ -70,7 +70,7 @@ export default async function PostPage({ params }: PostPageProps) {
       } as React.CSSProperties}
     >
       {/* Sidebar Esquerda (Posts da Linha) */}
-      <aside className="hidden xl:ml-0 xl:block 2xl:ml-24 min-w-0 border-r border-theme-border mt-6">
+      <aside className="hidden xl:ml-0 xl:block 3xl:ml-24 min-w-0 border-r border-theme-border mt-6">
         <PostSidebar
           line={currentPost.line}
           posts={linePosts || []}
@@ -79,7 +79,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </aside>
 
       {/* Conteúdo Central */}
-      <main className="min-w-0 max-w-full xl:max-w-250 py-8 px-2 lg:p-10">
+      <main className="min-w-0 max-w-full xl:max-w-250 py-8 px-2 lg:p-6">
         <nav className="mb-8 lg:mb-10 flex items-center text-sm font-medium text-theme-muted overflow-x-auto whitespace-nowrap pb-2">
           <Link href="/" className="hover:text-(--line-color-700) transition-colors flex items-center gap-1.5">
             <Home className="size-4" />
@@ -113,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </main>
 
       {/* Sidebar Direita (Trilhas) */}
-      <aside className="hidden xl:block xl:mr-0 2xl:mr-24 min-w-0 border-l border-theme-border mt-6">
+      <aside className="hidden xl:block xl:mr-0 3xl:mr-24 min-w-0 border-l border-theme-border mt-6">
         <PostTrails
           allTrails={allTrails || []}
           currentTrailSlug={currentPost.line.trail.slug}
