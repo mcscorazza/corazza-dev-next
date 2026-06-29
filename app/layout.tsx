@@ -25,17 +25,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <Script id="theme-sync" strategy="beforeInteractive">
-          {`
-            try {
-              if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-            } catch (_) {}
-          `}
-        </Script>
+
       </head>
 
       <Script
@@ -59,7 +49,17 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-
+        <Script id="theme-sync" strategy="beforeInteractive">
+          {`
+            try {
+              if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (_) {}
+          `}
+        </Script>
       </body>
     </html>
   );
