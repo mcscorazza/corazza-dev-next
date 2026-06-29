@@ -2,7 +2,9 @@
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math'; // 1. IMPORTADO
 import rehypeRaw from 'rehype-raw';
+import rehypeKatex from 'rehype-katex'; // 2. IMPORTADO
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useEffect, useState } from 'react';
@@ -63,8 +65,10 @@ export const PostContent = ({ content }: PostContentProps) => {
       prose-pre:bg-theme-code prose-pre:border prose-pre:border-none prose-pre:shadow-sm
     ">
       <ReactMarkdown
-        rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[remarkGfm]}
+        // 3. Adicionado o rehypeKatex junto com o rehypeRaw
+        rehypePlugins={[rehypeRaw, rehypeKatex]}
+        // 4. Adicionado o remarkMath junto com o remarkGfm
+        remarkPlugins={[remarkGfm, remarkMath]}
         components={{
           p: ({ children }) => {
             if (typeof children === 'object' && children !== null) {
@@ -76,7 +80,6 @@ export const PostContent = ({ content }: PostContentProps) => {
           },
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           img: ({ node, ...props }) => {
-            // Garante que o src seja tratado como string
             const srcString = typeof props.src === 'string' ? props.src : '';
             const [url, label] = srcString.split('#');
 
