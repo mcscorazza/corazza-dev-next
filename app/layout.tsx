@@ -59,6 +59,13 @@ export default function RootLayout({
         <main>
           {children}
         </main>
+        <footer className="py-8 text-center text-sm text-theme-muted border-t border-theme-border mt-12">
+          <div className="flex justify-center gap-4 mb-4">
+            <a href="/sobre" className="hover:text-theme-text transition-colors">Sobre o Autor</a>
+            <a href="/privacidade" className="hover:text-theme-text transition-colors">Política de Privacidade</a>
+          </div>
+          <p>© {new Date().getFullYear()} corazza.dev. Todos os direitos reservados.</p>
+        </footer>
 
       </body>
     </html>
