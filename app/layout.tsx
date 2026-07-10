@@ -25,17 +25,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <Script id="theme-sync" strategy="beforeInteractive">
-          {`
-            try {
-              if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-            } catch (_) {}
-          `}
-        </Script>
+
       </head>
 
       <Script
@@ -59,7 +49,17 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-        <footer className="py-8 text-center text-sm text-theme-muted border-t border-theme-border mt-12">
+        <Script id="theme-sync" strategy="beforeInteractive">
+          {`
+            try {
+              if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (_) {}
+          `}
+        </Script>        <footer className="py-8 text-center text-sm text-theme-muted border-t border-theme-border mt-12">
           <div className="flex justify-center gap-4 mb-4">
             <a href="/sobre" className="hover:text-theme-text transition-colors">Sobre o Autor</a>
             <a href="/privacidade" className="hover:text-theme-text transition-colors">Política de Privacidade</a>
