@@ -1,24 +1,33 @@
 import { MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${apiUrl}/posts/all-slugs`);
-  const allPosts = res.ok ? await res.json() : [];
+const NEXT_PUBLIC_API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://api.corazza.dev/api";
+const SITE_URL = "https://corazza.dev";
 
-  const postUrls = allPosts.map((post: any) => ({
-    url: `https://corazza.dev/post/${post.trailSlug}/${post.lineSlug}/${post.postSlug}`,
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticRoutes = ["", "/sobre", "/privacidade"].map((route) => ({
+    url: `${SITE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.8,
+    changeFrequency: "weekly" as const,
+    priority: route === "" ? 1.0 : 0.5,
   }));
 
-  return [
-    {
-      url: "https://corazza.dev",
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    ...postUrls,
-  ];
+  try {
+    const res = await fetch(`${NEXT_PUBLIC_API_URL}/posts`, {
+      next: { revalidate: 3600 },
+    });
+    const posts = await res.json();
+
+    const dynamicRoutes = posts.map((post: any) => ({
+      url: `${SITE_URL}/post/${post.trail.slug}/${post.line.slug}/${post.slug}`,
+      lastModified: new Date(post.date || new Date()),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }));
+
+    return [...staticRoutes, ...dynamicRoutes];
+  } catch (error) {
+    console.error("Erro ao gerar sitemap:", error);
+    return staticRoutes;
+  }
 }
