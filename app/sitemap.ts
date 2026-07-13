@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 const NEXT_PUBLIC_API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://sua-api.com/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://api.corazza.dev/api";
 const SITE_URL = "https://corazza.dev";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   try {
-    const res = await fetch(`${NEXT_PUBLIC_API_URL}/sitemap-posts`, {
+    const res = await fetch(`${NEXT_PUBLIC_API_URL}/posts/sitemap-posts`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error("Falha ao buscar posts da API");
